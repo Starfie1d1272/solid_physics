@@ -1,24 +1,30 @@
-# 🌍 Planetary Solid Physics (行星固体物理) @NJU
+# Planetary Solid Physics（行星固体物理）课程仓库
 
-> 🎓 本仓库记录了南京大学 (Nanjing University) 《行星固体物理》课程的编程作业、数据分析报告与学习记录。
+本仓库用于整理南京大学《行星固体物理》课程作业，包括代码、数据、图件和报告文档。
 
-## 📅 作业目录 (Assignments Overview)
+## 作业总览
 
-| 序号 | 课题 (Topic) | 核心技术/工具 | 截止日期 (Due) | 状态 |
-| :---: | :--- | :--- | :---: | :---: |
-| **[HW1](./HW1/)** |[**地震频度与 Gutenberg-Richter 定律分析**](./HW1/README.md) <br> *基于 USGS 目录验证 G-R 关系，求解 a, b 值。* | `pandas`, `matplotlib`, 线性拟合 | 2026/03/09 | ✅ 完成 |
-| **[HW2](./HW2/)** |[**应力张量分析与库仑破裂应力 (CFF) 建模**](./HW2/README.md) <br> *二维张量计算及 1992 Landers 地震触发效应评估。* | `numpy`, 连续介质力学, 理论推导 | 2026/03/16 | ✅ 完成 |
-| **[HW3](./HW3/)** |[**地震波数据处理：汶川地震波形下载、旋转与可视化**](./HW3/README.md) <br> *基于 ObsPy 获取波形，去仪器响应并绘制波形剖面图。* | `obspy`, `taup`, `cartopy`/`basemap` | 2026/03/23 | ✅ 完成 |
+| 作业 | 主题                                  | 目录          | 状态                       |
+| ---- | ------------------------------------- | ------------- | -------------------------- |
+| HW1  | 地震频度与 Gutenberg-Richter 定律分析 | [HW1](./HW1/) | 已完成                     |
+| HW2  | 应力张量分析与库仑破裂应力（CFF）计算 | [HW2](./HW2/) | 已完成                     |
+| HW3  | 地震波数据处理与波形可视化            | [HW3](./HW3/) | 已完成                     |
+| HW4  | 火星内核射线追踪与震相走时对比        | [HW4](./HW4/) | 题目一已完成，题目二待补交 |
 
----
-*注：各个作业的具体要求、理论背景及代码文件说明，请进入对应的子目录查看具体的 `README.md`。*
+## HW4 当前说明（2026/03/30）
 
-## 🛠️ 本地开发环境与技术栈 (Tech Stack)
+- 已完成：题目一（两套模型、27° 射线路径对比、震相走时对比表、讨论与结论）。
+- 待补交：题目二。
+- 主要文档：
+	- [HW4/README.md](./HW4/README.md)
+	- [HW4/HW4_Report.md](./HW4/HW4_Report.md)
+	- [HW4/HW4_Report_Submit.md](./HW4/HW4_Report_Submit.md)
 
-本项目的所有代码均在标准化、隔离的 Python 环境下开发测试。主要工具包括：
-- **核心环境：** `Python 3.11.15` (独立虚拟环境 `solid_physic`)
-- **地球物理专属库：** `ObsPy` (地震学处理核心)
-- **编辑器与版本控制：** `VS Code` + `Git` / `GitHub`
+## 运行环境
 
----
-*Created with ❤️ by [Xinyu Du (Starfield)](https://github.com/Starfie1d1272) | 2026*
+- Python 3.x
+- NumPy / Pandas / Matplotlib
+- ObsPy（含 TauP）
+- VS Code + Git
+
+各作业的详细说明请查看对应子目录中的 README。
