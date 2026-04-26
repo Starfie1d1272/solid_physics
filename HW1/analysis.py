@@ -1,20 +1,23 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # ==========================================
-# 第一步：设置中文字体，确保图表里的中文能正常显示
+# 第一步：设置中文字体（已为跨平台兼容进行简化）
 # ==========================================
-# Windows 系统通常自带 SimHei (黑体)
-plt.rcParams['font.sans-serif'] = ['SimHei']  
+# SimHei 是 Windows 专有字体，此处已注释；
+# 如果中文标签显示为方框，请安装中文字体（如 SimHei 或 Noto Sans CJK）并取消注释下一行：
+# plt.rcParams['font.sans-serif'] = ['SimHei']
 # 解决图表中负号 '-' 显示为方块的问题
-plt.rcParams['axes.unicode_minus'] = False    
+plt.rcParams['axes.unicode_minus'] = False
 
 # ==========================================
 # 第二步：读取 USGS 下载的 CSV 数据
 # ==========================================
-# 使用 r"..." 声明原生字符串，防止路径中的 \U 被错误解析
-file_path = r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\query.csv"
+# 使用 pathlib 构建跨平台数据路径
+data_dir = Path(__file__).parent / "data"
+file_path = str(data_dir / "query.csv")
 print("正在读取数据...")
 df = pd.read_csv(file_path)
 
@@ -121,7 +124,7 @@ plt.grid(True, which='major', linestyle='--', alpha=0.7)
 plt.tight_layout()
 
 # 将生成的图片保存到和 csv 相同的文件夹下
-save_path = r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\GR_Law_Plot.png"
+save_path = data_dir / "GR_Law_Plot.png"
 plt.savefig(save_path, dpi=300)
 print(f"图表已保存至: {save_path}")
 

@@ -1,0 +1,10 @@
+# solid_physics — Python dependencies
+# Install with: pip install -r requirements.txt
+
+numpy>=1.20
+pandas>=1.3
+matplotlib>=3.5
+scipy>=1.7
+obspy>=1.5.0
+geopandas>=0.10
+cartopy>=0.20

@@ -2,14 +2,18 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import geopandas as gpd
+from pathlib import Path
 
 # ==========================================
 # 0. 基础设置与数据读取
 # ==========================================
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 中文字体
+# SimHei 是 Windows 专有字体，此处已注释以确保跨平台兼容；
+# 如果中文标签显示为方框，请安装中文字体（如 SimHei 或 Noto Sans CJK）并取消注释下一行：
+# plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False    # 负号正常显示
 
-file_path = r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\query.csv"
+data_dir = Path(__file__).parent / "data"
+file_path = str(data_dir / "query.csv")
 df = pd.read_csv(file_path)
 
 # 清洗与筛选 (2010-2020, M>=5.0)
@@ -57,7 +61,7 @@ plt.grid(True, linestyle='--', alpha=0.5, zorder=0)
 plt.tight_layout()
 
 # 保存高清大图
-plt.savefig(r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\Plot_A_Spatial_GeoPandas.png", dpi=300)
+plt.savefig(data_dir / "Plot_A_Spatial_GeoPandas.png", dpi=300)
 
 # ==========================================
 # 图 B：累积型 G-R 定律关系图
@@ -98,7 +102,7 @@ plt.grid(True, linestyle='--', alpha=0.7)
 plt.tight_layout()
 
 # 保存图片
-plt.savefig(r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\Plot_B_Cumulative_GR.png", dpi=300)
+plt.savefig(data_dir / "Plot_B_Cumulative_GR.png", dpi=300)
 
 # (如果不想它弹窗卡住，可以在前面加 # 注释掉下面这行)
 #plt.show()
@@ -128,5 +132,5 @@ plt.ylabel('全球地震发生总次数 (M≥5.0)', fontsize=14)
 plt.title('图D: 全球地震历年频次时间序列 (2010-2020)', fontsize=16)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
-plt.savefig(r"C:\Users\starfie1d\Documents\我的文件\行星固体物理\Homework1\Plot_D_Time_Series.png", dpi=300)
+plt.savefig(data_dir / "Plot_D_Time_Series.png", dpi=300)
 #plt.show()

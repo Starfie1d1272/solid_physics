@@ -47,8 +47,8 @@ if __name__ == "__main__":
     print(f"\n>> Maximum absolute shear stress occurs at Azimuth: {max_az_b} degrees.\n")
     
     # 将表格导出为 CSV 文件
-    df_b.to_csv("case_b_landers_stress.csv", index=False)
-    print("-> Table exported to 'case_b_landers_stress.csv'")
+    df_b.to_csv("data/case_b_landers_stress.csv", index=False)
+    print("-> Table exported to 'data/case_b_landers_stress.csv'")
     
     
     # ==========================================
@@ -67,6 +67,6 @@ if __name__ == "__main__":
     print(f"\n>> Maximum absolute shear stress occurs at Azimuth: {max_az_d} degrees.\n")
     
     # 将表格导出为 CSV 文件
-    df_d.to_csv("case_d_1000yr_stress.csv", index=False)
-    print("-> Table exported to 'case_d_1000yr_stress.csv'")
+    df_d.to_csv("data/case_d_1000yr_stress.csv", index=False)
+    print("-> Table exported to 'data/case_d_1000yr_stress.csv'")
     print("--------------------------------------------------")
