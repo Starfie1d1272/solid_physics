@@ -13,6 +13,7 @@ HW1/        — Gutenberg-Richter law analysis (standalone .py scripts)
 HW2/        — Stress tensor & Coulomb Failure Function (standalone .py scripts)
 HW3/        — Seismic waveform processing (Jupyter notebook, SAC data)
 HW4/        — Mars inner core ray tracing & Earth-flattening transform (Jupyter notebooks)
+HW5/        — Zoeppritz coefficients for SV wave incidence (Jupyter notebook)
 ```
 
 Each HW typically has:
@@ -49,6 +50,16 @@ cd HW4 && jupyter notebook HW4_text2.ipynb
 ```
 
 Or in VS Code: open the `.ipynb` file and run cells sequentially.
+
+### Local Mac verification (miniforge/mamba)
+```bash
+cd ~/GitHub/solid_physics/HW5 && mamba run -n solid_physics python verify.py
+```
+
+### Remote Windows verification (SSH)
+```bash
+cd ~/GitHub/solid_physics/HW5 && ssh 192.168.144.2 "cd /d D:\GitHub\solid_physics\HW5 && C:\ProgramData\anaconda3\Scripts\conda.exe run -n solid_physics python verify.py"
+```
 
 ### Installing dependencies
 ```bash
