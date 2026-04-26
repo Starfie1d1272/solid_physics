@@ -170,3 +170,184 @@ mamba run -n solid_physics jupyter notebook HW5/HW5_Q1_Zoeppritz.ipynb
 ```
 
 所需依赖：`numpy`, `matplotlib`
+
+---
+
+## 第二题：P 波斜入射核幔边界（固体-流体界面）的 Zoeppritz 系数
+
+### 问题重述
+
+考虑地球核幔边界（CMB）——一个固体（下地幔）与流体（外地核）的理想平面界面。一道 P 波从下地幔以角度 $i$ 斜入射至界面上，发生以下波型转换：
+
+- **反射 P 波**（同模式反射），振幅记为 $R_{pp}$
+- **反射 S 波**（mode-converted），振幅记为 $R_{ps}$
+- **透射 P 波**（透过界面进入流体），振幅记为 $T_{pp}$
+- **透射 S 波**：**不存在**（$T_{ps}=0$），因为流体无法传播剪切波
+
+采用固体-流体界面的物理参数：
+
+| 参数 | 介质 1（下地幔，固体） | 介质 2（外地核，流体） |
+| :-- | :--: | :--: |
+| 密度 $\rho$ (kg/m³) | $5.5 \times 10^3$ | $9.9 \times 10^3$ |
+| P 波速度 $\alpha$ (km/s) | 13.7 | 8.0 |
+| S 波速度 $\beta$ (km/s) | 7.2 | 0.0 |
+
+---
+
+### 第一步：Snell 定律与射线参数
+
+由于 P 波入射，射线参数定义如下：
+
+$$ p = \frac{\sin i}{\alpha_1} $$
+
+各次级波角度由 Snell 定律给出：
+
+$$ \theta_{P1} = i \quad \text{（反射 P 波角 = 入射角）} $$
+$$ \theta_{S1} = \arcsin(p\,\beta_1) \quad \text{（反射 S 波—mode-converted）} $$
+$$ \theta_{P2} = \arcsin(p\,\alpha_2) \quad \text{（透射 P 波）} $$
+
+**关键物理区别**：由于 $\alpha_1 = 13.7 > \alpha_2 = 8.0$，透射 P 波的临界条件 $\sin i_c = \alpha_1 / \alpha_2 > 1$，意味着**透射 P 波无实数临界角**（始终处于亚临界或超复数状态）。唯一的临界角来自反射 S 波：
+
+$$ i_c^{S1} = \arcsin\left(\frac{\beta_1}{\alpha_1}\right) = \arcsin\left(\frac{7.2}{13.7}\right) \approx 31.71^\circ $$
+
+---
+
+### 第二步：固体-流体界面的边界条件
+
+与固体-固体界面不同，固体-流体界面仅需满足三个边界条件：
+
+1. **法向位移连续**（$w_1 = w_2$）：界面两侧的法向位移必须相等
+2. **法向应力连续**（$\sigma_{zz1} = \sigma_{zz2}$）：垂直方向的应力平衡
+3. **切向应力为零**（$\sigma_{xz2} = 0$）：流体无法承受剪应力，因此界面处的切向应力必须为零
+
+第三点是固体-流体界面的**核心特征**——它是 $T_{ps}=0$ 的物理起源，也是降为 $3\times3$ 系统的原因。
+
+---
+
+### 第三步：建立 $3 \times 3$ Zoeppritz 方程组
+
+将入射 P 波、反射 P 波、反射 S 波、透射 P 波的位移场和应力表达式代入边界条件，整理后得到矩阵方程 $\mathbf{M} \mathbf{x} = \mathbf{b}$：
+
+未知向量：
+$$ \mathbf{x} = \begin{bmatrix} R_{pp} \\ R_{ps} \\ T_{pp} \end{bmatrix} $$
+
+**法向位移连续（第 1 行）：**
+
+$$ \cos\theta_{P1} \cdot R_{pp} + \sin\theta_{S1} \cdot R_{ps} + \cos\theta_{P2} \cdot T_{pp} = \cos\theta_{P1} $$
+
+**法向应力连续（第 2 行）：**
+
+$$ -\rho_1\alpha_1\cos(2\theta_{S1}) \cdot R_{pp} + \rho_1\beta_1\sin(2\theta_{S1}) \cdot R_{ps} + \rho_2\alpha_2 \cdot T_{pp} = \rho_1\alpha_1\cos(2\theta_{S1}) $$
+
+**切向应力为零（第 3 行）：**
+
+$$ \frac{\beta_1}{\alpha_1}\sin(2\theta_{P1}) \cdot R_{pp} - \cos(2\theta_{S1}) \cdot R_{ps} + 0 \cdot T_{pp} = \frac{\beta_1}{\alpha_1}\sin(2\theta_{P1}) $$
+
+矩阵形式：
+
+$$ \mathbf{M} = \begin{bmatrix}
+\cos\theta_{P1} & \sin\theta_{S1} & \cos\theta_{P2} \\[4pt]
+-\rho_1\alpha_1\cos(2\theta_{S1}) & \rho_1\beta_1\sin(2\theta_{S1}) & \rho_2\alpha_2 \\[4pt]
+\frac{\beta_1}{\alpha_1}\sin(2\theta_{P1}) & -\cos(2\theta_{S1}) & 0
+\end{bmatrix}, \quad
+\mathbf{b} = \begin{bmatrix}
+\cos\theta_{P1} \\[4pt]
+\rho_1\alpha_1\cos(2\theta_{S1}) \\[4pt]
+\frac{\beta_1}{\alpha_1}\sin(2\theta_{P1})
+\end{bmatrix} $$
+
+---
+
+### 第四步：正常入射验证
+
+当 $i = 0^\circ$（垂直入射）时：
+- $\theta_{P1} = 0$, $\theta_{S1} = 0$, $\theta_{P2} = 0$
+- $\cos(0) = 1$, $\sin(0) = 0$, $\cos(2\cdot0) = 1$, $\sin(2\cdot0) = 0$
+
+代入得：
+
+$$ \begin{bmatrix}
+1 & 0 & 1 \\
+-\rho_1\alpha_1 & 0 & \rho_2\alpha_2 \\
+0 & -1 & 0
+\end{bmatrix}
+\begin{bmatrix} R_{pp} \\ R_{ps} \\ T_{pp} \end{bmatrix}
+= \begin{bmatrix} 1 \\ \rho_1\alpha_1 \\ 0 \end{bmatrix} $$
+
+第三行给出 $R_{ps} = 0$（垂直入射时无 mode conversion）。第一、二行给出：
+
+$$ R_{pp} + T_{pp} = 1 $$
+$$ -\rho_1\alpha_1 R_{pp} + \rho_2\alpha_2 T_{pp} = \rho_1\alpha_1 $$
+
+解得经典结果：
+
+$$ R_{pp} = \frac{\rho_2\alpha_2 - \rho_1\alpha_1}{\rho_1\alpha_1 + \rho_2\alpha_2}, \quad T_{pp} = 1 - R_{pp} = \frac{2\rho_1\alpha_1}{\rho_1\alpha_1 + \rho_2\alpha_2} $$
+
+代入 CMB 参数：
+$$ Z_1 = \rho_1\alpha_1 = 5.5\times10^3 \times 13.7\times10^3 = 7.535\times10^7 $$
+$$ Z_2 = \rho_2\alpha_2 = 9.9\times10^3 \times 8.0\times10^3 = 7.920\times10^7 $$
+$$ R_{pp} = \frac{7.920 - 7.535}{7.535 + 7.920} \times 10^7 = 0.0249 $$
+$$ T_{pp} = 1 - 0.0249 = 0.9751 $$
+
+**物理意义**：CMB 处 P 波的声阻抗比 $Z_2/Z_1 \approx 1.05$ 非常接近 1，因此在垂直入射时绝大部分 P 波能量透射进入外地核，反射极弱（约 2.5%）。这与 CMB 的 P 波反射系数很小的地震学观测一致。
+
+---
+
+### 第五步：数值模拟结果
+
+![P-wave Zoeppritz Coefficients at Core-Mantle Boundary](./figures/HW5_Q2_CMB_Zoeppritz.png)
+*(图 2：P 波入射 CMB 时三个 Zoeppritz 系数的振幅—角度关系曲线。垂直虚线标示反射 S 波临界角 $i_c^{S1} \approx 31.71^\circ$。)*
+
+#### 关键特征分析
+
+1. **近垂直入射（$0^\circ < i < 20^\circ$）**：
+   - $|R_{pp}| \approx 0.025$、$|T_{pp}| \approx 0.975$、$|R_{ps}| \approx 0$
+   - 几乎无 mode conversion，因为 P 波近垂直入射时产生的切向分量极小
+   - 能量分配主要由声阻抗比 $Z_2/Z_1$ 决定
+
+2. **过渡区（$20^\circ < i < 31.71^\circ$）**：
+   - $|R_{pp}|$ 缓慢增大，$|T_{pp}|$ 对应下降
+   - $|R_{ps}|$ 开始非零增长——P→S 转换效率随入射角增加
+
+3. **临界角（$i = 31.71^\circ$）**：
+   - 反射 S 波达到临界：$\sin\theta_{S1} = 1$，$\theta_{S1} = 90^\circ$
+   - 此处 $|R_{ps}|$ 出现峰值，之后进入超临界区变为复数
+   - 这是 CMB 唯一存在的临界角
+
+4. **超临界区（$i > 31.71^\circ$）**：
+   - $|R_{pp}|$ 快速增长，$|T_{pp}|$ 急剧下跌
+   - $|R_{ps}|$ 在临界角附近达峰后衰减
+   - $i \to 90^\circ$ 时 $|R_{pp}| \to 1$，$|T_{pp}| \to 0$——掠入射下 P 波被完全反射
+
+5. **与 Q1（SV 波固体-固体界面）的关键差异**：
+   - 只有 1 个临界角（Q1 有 3 个）
+   - 存在一个恒为零的系数（$T_{ps}=0$），系统降为 $3\times3$
+   - 无透射 P 波临界角（因 $\alpha_1 > \alpha_2$）
+   - 能量在 post-critical 区主要通过 $|R_{pp}|$ 传递，而非 $|R_{ps}|$
+
+---
+
+### 总结
+
+本题目完成了以下工作：
+
+1. **理论推导**：从固体-流体界面的三个物理边界条件出发，严格导出了 P 波入射核幔边界的 $3\times3$ Zoeppritz 方程组。与固体-固体界面的核心区别在于切向应力为零条件，这一条件导致系统降维、$T_{ps}=0$ 恒成立。
+
+2. **数值验证**：采用 CMB 的实测参数（$\rho_1=5.5$ g/cm³, $\alpha_1=13.7$ km/s, $\beta_1=7.2$ km/s; $\rho_2=9.9$ g/cm³, $\alpha_2=8.0$ km/s），计算了 $0^\circ$–$90^\circ$ 范围内三个 Zoeppritz 系数的振幅特征。垂直入射的理论值与数值结果一致（$R_{pp}=0.0249$, $T_{pp}=0.9751$）。
+
+3. **物理图像**：CMB 处 P 波的行为由阻抗比 $Z_2/Z_1 \approx 1.05$ 和 $\alpha_1/\alpha_2 > 1$ 共同控制。反射 S 波临界角 $i_c^{S1} \approx 31.71^\circ$ 是唯一显著的特征角。在超临界区，能量主要由反射 P 波携带，与固体-固体界面 SV 波入射的行为形成鲜明对比。
+
+---
+
+### 附录：代码运行说明
+
+- Q1 核心计算位于 `HW5_Q1_Zoeppritz.ipynb`
+- Q2 核心计算位于 `HW5_Q2_CMB_Zoeppritz.ipynb`
+
+运行方式：
+```bash
+cd ~/GitHub/solid_physics/HW5
+mamba run -n solid_physics jupyter notebook HW5_Q2_CMB_Zoeppritz.ipynb
+```
+
+所需依赖：`numpy`, `matplotlib`
