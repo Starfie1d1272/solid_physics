@@ -48,10 +48,11 @@ mamba run -n solid_physics jupyter notebook HW5_Q1_Zoeppritz.ipynb
 
 ```
 HW5/
-├── HW5_Q1_Zoeppritz.ipynb    # 主 notebook
-├── figures/
-│   └── HW5_Q1_Zoeppritz.png  # 生成图件
-└── README.md                 # 本文件
+|├── HW5_Q1_Zoeppritz.ipynb    # 主 notebook
+|├── HW5_Report.md             # 正式作业报告（含完整推导 + 数值验证）
+|├── figures/
+|│   └── HW5_Q1_Zoeppritz.png  # 生成图件
+|└── README.md                 # 本文件
 ```
 
 ## 注意事项
