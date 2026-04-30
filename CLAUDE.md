@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Planetary Solid Physics (行星固体物理) course repository at Nanjing University. Each homework assignment is self-contained in its own directory (`HW1`–`HW4`).
+Planetary Solid Physics (行星固体物理) course repository at Nanjing University. Each homework assignment is self-contained in its own directory (`HW1`–`HW5`).
 
 ## Project Structure
 
@@ -42,24 +42,16 @@ cd HW2 && python "text2(g).py"
 cd HW2 && python "text2(h).py"
 ```
 
-### Jupyter notebooks (HW3, HW4)
+### Jupyter notebooks (HW3, HW4, HW5)
 ```bash
 cd HW3 && jupyter notebook hw3.ipynb
 cd HW4 && jupyter notebook HW4_text1.ipynb
 cd HW4 && jupyter notebook HW4_text2.ipynb
+cd HW5 && jupyter notebook HW5_Q1_Zoeppritz.ipynb
+cd HW5 && jupyter notebook HW5_Q2_CMB_Zoeppritz.ipynb
 ```
 
 Or in VS Code: open the `.ipynb` file and run cells sequentially.
-
-### Local Mac verification (miniforge/mamba)
-```bash
-cd ~/GitHub/solid_physics/HW5 && mamba run -n solid_physics python verify.py
-```
-
-### Remote Windows verification (SSH)
-```bash
-cd ~/GitHub/solid_physics/HW5 && ssh 192.168.144.2 "cd /d D:\GitHub\solid_physics\HW5 && C:\ProgramData\anaconda3\Scripts\conda.exe run -n solid_physics python verify.py"
-```
 
 ### Installing dependencies
 ```bash
@@ -75,3 +67,4 @@ pip install geopandas cartopy
 - **HW3**: Pipeline: read SAC files → download station metadata from EarthScope → detrend → remove instrument response (to velocity) → rotate NE→RT using back azimuth → plot record sections with theoretical P/S arrivals from `obspy.taup.TauPyModel("iasp91")`.
 - **HW4**: `HW4_text1.ipynb` builds two Mars 1D velocity models (`.nd` files compiled to `.npz` via `build_taup_model`) with/without solid inner core, then uses `TauPyModel` for ray path computation. `HW4_text2.ipynb` implements ray tracing from scratch using three methods (cartesian, spherical, earth-flattening) with singularity-avoiding substitution $u = \sqrt{r - r_{\text{turn}}}$ for numerical integration.
 - **TauP model files** (HW4): `.nd` files define layer interfaces with keywords `mantle`, `outer-core`, `inner-core`. Compiled `.npz` files go in `models/` directory.
+- **HW5**: `HW5_Q1_Zoeppritz.ipynb` computes Zoeppritz coefficients for SV wave incidence at a solid-solid interface using the Aki & Richards (2002) 4×4 matrix formulation. `HW5_Q2_CMB_Zoeppritz.ipynb` handles P-wave incidence at the core-mantle boundary (solid-fluid interface) with a reduced 3×3 system (tangential stress = 0 in fluid). Both use `numpy.lib.scimath.arcsin` for complex angles beyond critical incidence, and `np.abs()` for plotting coefficient magnitudes.

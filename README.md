@@ -10,18 +10,18 @@
 | HW2  | 应力张量分析与库仑破裂应力（CFF）计算 | [HW2](./HW2/) | 已完成                     |
 | HW3  | 地震波数据处理与波形可视化            | [HW3](./HW3/) | 已完成                     |
 | HW4  | 火星内核射线追踪与震相走时对比        | [HW4](./HW4/) | 已完成                     |
+| HW5  | Zoeppritz 方程与SV/P波斜入射系数计算  | [HW5](./HW5/) | 已完成                     |
 
-## HW4 当前说明（2026/04/10）
+## HW5 当前说明（2026/05/01）
 
-- 题目一：利用 ObsPy TauP 构建火星 1D 模型（有/无固态内核），对比 27° 震相走时与射线路径。
-- 题目二：从零实现射线追踪，对比直角坐标/球坐标/展平变换三种方法的走时与路径差异。
+- 题目一：SV 波斜入射固体-固体平面界面，推导并数值求解 4×4 Zoeppritz 方程组（Aki & Richards 2002）。
+- 题目二：P 波斜入射核幔边界（CMB，固体-流体界面），推导并求解 3×3 Zoeppritz 方程组。
 - 主要 Notebook：
-	- [HW4_text1.ipynb](./HW4/HW4_text1.ipynb) — 火星内核 TauP 射线追踪
-	- [HW4_text2.ipynb](./HW4/HW4_text2.ipynb) — 地球展平变换与自实现射线追踪
+	- [HW5_Q1_Zoeppritz.ipynb](./HW5/HW5_Q1_Zoeppritz.ipynb) — SV 波固体-固体界面
+	- [HW5_Q2_CMB_Zoeppritz.ipynb](./HW5/HW5_Q2_CMB_Zoeppritz.ipynb) — P 波核幔边界（固体-流体）
 - 主要文档：
-	- [HW4/README.md](./HW4/README.md)
-	- [HW4/HW4_Report.md](./HW4/HW4_Report.md)
-	- [HW4/HW4_Report_Submit.md](./HW4/HW4_Report_Submit.md)
+	- [HW5/README.md](./HW5/README.md)
+	- [HW5/HW5_Report.md](./HW5/HW5_Report.md)
 
 ## 运行环境
 
